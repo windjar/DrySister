@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "com.wind.drysister"
-        minSdk 16
-        targetSdk 32
+        minSdkVersion 16
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
 
@@ -35,4 +35,5 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 }
