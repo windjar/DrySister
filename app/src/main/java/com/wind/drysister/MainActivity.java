@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.wind.drysister.helper.SisterLoader;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,12 +23,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private PictureLoader loader;
     private SisterApi sisterApi;
     private SisterTask sisterTask;
+    private SisterLoader mLoader;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sisterApi = new SisterApi();
         loader = new PictureLoader();
+        mLoader = SisterLoader.getInstance(MainActivity.this);
         initData();
         initUI();
     }
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (curPos > 9) {
                         curPos = 0;
                     }
-                    loader.load(showImg, data.get(curPos).getUrl());
+                    mLoader.bindBitmap(data.get(curPos).getUrl(),showImg,400,400);
                     curPos++;
                 }
                 break;
@@ -90,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        sisterTask.cancel(true);
+        if(sisterTask != null) {
+            sisterTask.cancel(true);
+        }
     }
 }
